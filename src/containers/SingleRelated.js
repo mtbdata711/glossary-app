@@ -3,6 +3,8 @@ import SingleRelatedInput from "./SingleRelatedInput";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusSquare } from "@fortawesome/free-solid-svg-icons";
 import { faMinusSquare } from "@fortawesome/free-solid-svg-icons";
+import { Fetcher } from "./fetcher.js";
+const fetcher = new Fetcher();
 
 export default class SingleRelated extends Component {
   constructor(props) {
@@ -64,7 +66,7 @@ export default class SingleRelated extends Component {
           {this.state.terms.map((related, index) => {
             return (
               <li key={index}>
-                <a className="link" href={`/term/${related}`}>
+                <a className="link" href={`/term/${fetcher.slugify(related)}`}>
                   {related}{" "}
                 </a>
               </li>

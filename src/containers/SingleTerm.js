@@ -22,6 +22,7 @@ export default class SingleTerm extends Component {
       edit: false,
       view: false,
       history: null,
+      historyData: null,
       success: null
     };
   }
@@ -33,7 +34,7 @@ export default class SingleTerm extends Component {
   };
 
   HistoryItems = () => {
-    if (this.state.view && this.state.history !== null) {
+    if (this.state.view && this.state.historyData !== null) {
       return this.state.history.map((single, key) => {
         if (key !== 0) {
           return (
@@ -47,6 +48,14 @@ export default class SingleTerm extends Component {
           );
         }
       });
+    } else {
+      return (
+        <li>
+          <p className="text-muted">
+            + This is the first definition of this term
+          </p>
+        </li>
+      );
     }
   };
 
@@ -115,9 +124,12 @@ export default class SingleTerm extends Component {
     });
     if (this.state.term !== null) {
       const history = await fetcher.fetchHistoryById(this.state.term._id);
-      this.setState({
-        history: history
-      });
+      if (history.length) {
+        this.setState({
+          history: history,
+          historyData: true
+        });
+      }
     }
   }
 
@@ -161,7 +173,10 @@ export default class SingleTerm extends Component {
     return (
       <Fragment>
         {this.state.success ? (
-          <GenerateSuccess term={this.state.term.term} message='was added to your saved terms!' />
+          <GenerateSuccess
+            term={this.state.term.term}
+            message="was added to your saved terms!"
+          />
         ) : null}
         <div className="results-wrapper single-result sm-col-10">
           <div className="single-container sm-col-12">
@@ -194,9 +209,9 @@ export default class SingleTerm extends Component {
           <div className="single-container sm-col-10">
             <div className="content sm-col-12">
               <p className="text-muted">
-                Added by:{" "}
+                Added by:
                 <b>
-                  {this.state.history === null
+                  {this.state.historyData === null
                     ? term.user_name
                     : this.state.history[0].user_name}
                 </b>
@@ -278,6 +293,7 @@ export default class SingleTerm extends Component {
   };
 
   render() {
+    console.log(this.state.term)
     return (
       <Fragment>
         {this.state.term !== null ? this.SingleTermContent() : null}

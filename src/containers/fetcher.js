@@ -36,7 +36,7 @@ export class Fetcher {
   }
 
 async fetchHistoryById(id) {
-  const url = `${this.url}/gethistory/${id}`;
+  const url = `${this.url}/gethistory?id=${id}`;
   var response = await fetch(url);
   response = await response.json();
   return response;
