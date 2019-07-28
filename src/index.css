@@ -57,6 +57,15 @@ code {
   background-color: transparentr gba(0, 0, 0, 0);
 }
 
+.results-container-column {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: transparentr gba(0, 0, 0, 0);
+}
+
 .single-result-link {
   margin-left: 15px;
 }

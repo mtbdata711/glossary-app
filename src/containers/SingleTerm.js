@@ -118,6 +118,7 @@ export default class SingleTerm extends Component {
   }
 
   async componentDidMount() {
+    window.scrollTo(0, 0);
     const term = await fetcher.fetchTermByPath(this.props);
     this.setState({
       term: term
@@ -293,7 +294,7 @@ export default class SingleTerm extends Component {
   };
 
   render() {
-    console.log(this.state.term)
+    console.log(this.state.term);
     return (
       <Fragment>
         {this.state.term !== null ? this.SingleTermContent() : null}
