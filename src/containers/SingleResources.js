@@ -3,6 +3,7 @@ import SingleResourceInput from "./SingleResourceInput";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusSquare } from "@fortawesome/free-solid-svg-icons";
 import { faMinusSquare } from "@fortawesome/free-solid-svg-icons";
+import ls from "local-storage";
 
 export default class SingleResources extends Component {
   constructor(props) {
@@ -84,25 +85,26 @@ export default class SingleResources extends Component {
           {this.ResourceContent()}
           {this.state.count.length > 0 ? this.addContent() : null}
         </ul>
-
-        <div className="icon-container">
-          <span className="icon">
-            <FontAwesomeIcon
-              icon={faPlusSquare}
-              onClick={this.HandleClick}
-              size="2x"
-            />{" "}
-          </span>
-          {!this.state.addResource ? null : (
+        {!ls.get("currentUser") ? null : (
+          <div className="icon-container">
             <span className="icon">
               <FontAwesomeIcon
-                icon={faMinusSquare}
-                onClick={this.HandleRemove}
+                icon={faPlusSquare}
+                onClick={this.HandleClick}
                 size="2x"
               />{" "}
             </span>
-          )}
-        </div>
+            {!this.state.addResource ? null : (
+              <span className="icon">
+                <FontAwesomeIcon
+                  icon={faMinusSquare}
+                  onClick={this.HandleRemove}
+                  size="2x"
+                />{" "}
+              </span>
+            )}
+          </div>
+        )}
       </div>
     );
   }

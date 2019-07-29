@@ -49,6 +49,13 @@ async fetchUserSavedTerms(userId) {
   return response;
 }
 
+async fetchTermsByUser(userId) {
+  const url = `${this.url}/getuserterms?user=${userId}`;
+  var response = await fetch(url);
+  response = await response.json();
+  return response;
+}
+
 slugify = input => {
   const output = input.toLowerCase();
   return output.replace(/\W/g, "");

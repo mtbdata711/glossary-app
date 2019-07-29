@@ -49,10 +49,6 @@ class NavBar extends Component {
                 </LinkContainer>
               )}
               {!ls.get("currentUser") ? null : (
-                <NavItem onClick={this.logoutUser}>Logout</NavItem>
-              )}
-
-              {!ls.get("currentUser") ? null : (
                 <LinkContainer to="/new">
                   <NavItem>Add Term</NavItem>
                 </LinkContainer>
@@ -62,9 +58,19 @@ class NavBar extends Component {
                   <NavItem>Saved Terms</NavItem>
                 </LinkContainer>
               )}
-              <NavItem href="https://codeyourfuture.io/about/">
-                About Us
-              </NavItem>
+              {!ls.get("currentUser") ? null : (
+                <LinkContainer to="/myterms">
+                  <NavItem>My Terms</NavItem>
+                </LinkContainer>
+              )}
+              {!ls.get("currentUser") ? null : (
+                <NavItem onClick={this.logoutUser}>Logout</NavItem>
+              )}
+              {ls.get("currentUser") ? null : (
+                <NavItem href="https://codeyourfuture.io/about/">
+                  About Us
+                </NavItem>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Navbar>

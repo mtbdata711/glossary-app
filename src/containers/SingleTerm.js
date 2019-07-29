@@ -191,19 +191,18 @@ export default class SingleTerm extends Component {
                 </h1>
               </div>
               <div className="lg-col-2 md-col-2 sm-col-12">
-                <div className="icon-container">
-                  <span className="icon">
-                    <FontAwesomeIcon
-                      icon={faSave}
-                      size="3x"
-                      onClick={this.saveTerm}
-                    />
-                    {""}
-                  </span>
-                  {/* <span className="icon">
-                <FontAwesomeIcon icon={faEdit} size="2x" />{" "}
-              </span> */}
-                </div>
+                {!ls.get("currentUser") ? null : (
+                  <div className="icon-container">
+                    <span className="icon">
+                      <FontAwesomeIcon
+                        icon={faSave}
+                        size="3x"
+                        onClick={this.saveTerm}
+                      />
+                      {""}
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -216,7 +215,6 @@ export default class SingleTerm extends Component {
                     ? term.user_name
                     : this.state.history[0].user_name}
                 </b>
-                {/* <b></b> {ls.get("currentUser")} */}
               </p>
               {this.state.edit === true ? (
                 <Fragment>
@@ -234,13 +232,15 @@ export default class SingleTerm extends Component {
                 <p>{term.definition}</p>
               )}
               <div className="def-icon-container">
-                <span className="icon">
-                  <FontAwesomeIcon
-                    icon={faEdit}
-                    onClick={this.toggleEditable}
-                    size="2x"
-                  />{" "}
-                </span>
+                {!ls.get("currentUser") ? null : (
+                  <span className="icon">
+                    <FontAwesomeIcon
+                      icon={faEdit}
+                      onClick={this.toggleEditable}
+                      size="2x"
+                    />{" "}
+                  </span>
+                )}
               </div>
               <div
                 onClick={this.ToggleHistory}

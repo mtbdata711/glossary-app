@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusSquare } from "@fortawesome/free-solid-svg-icons";
 import { faMinusSquare } from "@fortawesome/free-solid-svg-icons";
 import { Fetcher } from "./fetcher.js";
+import ls from "local-storage";
 const fetcher = new Fetcher();
 
 export default class SingleRelated extends Component {
@@ -84,24 +85,26 @@ export default class SingleRelated extends Component {
           {this.ResourceContent()}
           {this.state.count.length > 0 ? this.addContent() : null}
         </ul>
-        <div className="icon-container">
-          <span className="icon">
-            <FontAwesomeIcon
-              icon={faPlusSquare}
-              onClick={this.HandleClick}
-              size="2x"
-            />{" "}
-          </span>
-          {!this.state.addRelated ? null : (
+        {!ls.get("currentUser") ? null : (
+          <div className="icon-container">
             <span className="icon">
               <FontAwesomeIcon
-                icon={faMinusSquare}
-                onClick={this.HandleRemove}
+                icon={faPlusSquare}
+                onClick={this.HandleClick}
                 size="2x"
               />{" "}
             </span>
-          )}
-        </div>
+            {!this.state.addRelated ? null : (
+              <span className="icon">
+                <FontAwesomeIcon
+                  icon={faMinusSquare}
+                  onClick={this.HandleRemove}
+                  size="2x"
+                />{" "}
+              </span>
+            )}
+          </div>
+        )}
       </div>
     );
   }

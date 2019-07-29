@@ -12,6 +12,7 @@ import AddNewTerm from "./containers/AddNewTerm";
 import ls from "local-storage";
 import { Fetcher } from "./containers/fetcher";
 import SavedTerms from "./containers/SavedTerms";
+import UserTerms from "./containers/UserTerms";
 const fetcher = new Fetcher();
 
 class Routes extends Component {
@@ -64,6 +65,7 @@ class Routes extends Component {
         <Route path="/search/:query" component={SearchResults} />
         <Route path="/savedterms" component={SavedTerms} />
         <Route path="/term/:query" component={SingleTerm} />
+        <Route path="/myterms" component={UserTerms} />
         {/* Finally, catch all unmatched routes */}
         <Route component={NotFound} />
       </Switch>
