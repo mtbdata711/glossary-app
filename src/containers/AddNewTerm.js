@@ -26,7 +26,6 @@ class AddNewTerm extends Component {
     const reqBody = {
       term: formData.term,
       definition: formData.definition,
-      code_example: formData.code_example,
       topic: formData.topic,
       resources_url: Object.values(formData.resourcesURL),
       resources: Object.values(formData.resources),
@@ -40,7 +39,7 @@ class AddNewTerm extends Component {
     this.sendFetch(reqBody);
     // this.inputRef.scrollIntoView(true , {behavior: "smooth"})
     window.scroll({
-      top: 10,
+      top: 0,
       left: 0,
       behavior: "smooth"
     });
@@ -75,7 +74,11 @@ class AddNewTerm extends Component {
         // });
         if (response._id) {
           this.setState({
-            generatedLink: [response.topic_slug, response.term_slug, response.term]
+            generatedLink: [
+              response.topic_slug,
+              response.term_slug,
+              response.term
+            ]
           });
         } else {
           this.setState({
@@ -113,8 +116,7 @@ class AddNewTerm extends Component {
   render() {
     return (
       <div>
-        <div className="results-container justify-content-center">
-          
+        <div className="results-container-column justify-content-center">
           {this.state.generatedLink === null ? null : (
             <GeneratedLink
               topic={this.state.generatedLink[0]}
@@ -123,7 +125,7 @@ class AddNewTerm extends Component {
             />
           )}
           {this.state.generateError === false ? null : <GeneratedError />}
-            
+
           <form onSubmit={this.handleSubmit} id="addNew">
             <h1 className="add-new-heading">Add New Term</h1>
             <div className="add-new-wrapper">
@@ -137,13 +139,6 @@ class AddNewTerm extends Component {
               <SingleTextArea
                 name="definition"
                 label="Definition"
-                controlFunc={this.handleSingle}
-              />
-              <SingleInput
-                label="Code Example URL"
-                placeholder="Code Example URL"
-                type="url"
-                name="code_example"
                 controlFunc={this.handleSingle}
               />
               <SingleInput
