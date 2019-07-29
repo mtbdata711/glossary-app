@@ -69,14 +69,17 @@ class Signup extends Component {
         password: this.state.password,
         role: this.state.status
       };
-      this.SubmitUserRegistration(regObj);
+
+      if (this.state.password !== this.state.confirmPassword) {
+        alert("The passwords doesn't match");
+        return false; // The form won't submit
+      } else {
+        return this.SubmitUserRegistration(regObj);
+      }
     } else {
       alert("FORM INVALID ");
     }
-    if (this.state.password !== this.state.confirmPassword) {
-      alert("The passwords doesn't match");
-      return false; // The form won't submit
-    } else return true; // The form will submit
+    // The form will submit
   };
 
   SubmitUserRegistration = obj => {
@@ -93,21 +96,17 @@ class Signup extends Component {
       .then(response => {
         if (response._id) {
           ls.set("currentUser", response._id);
-          this.handleRedirect()
-
+          this.handleRedirect();
         }
       });
   };
-
 
   handleRedirect = () => {
     const location = `/`;
 
     this.props.history.push(location);
     this.props.history.replace(location);
-
-}
-
+  };
 
   handleChange = e => {
     e.preventDefault();
@@ -135,16 +134,16 @@ class Signup extends Component {
         formErrors.password =
           value.length < 6 ? "minimum 6 characaters required" : "";
         break;
-      // case "confirmPassword":
-      //   formErrors.confirmPassword =
-      //     value.length < 6 ? "minimum 6 characaters required" : "";
-      //   break;
+      case "confirmPassword":
+        formErrors.confirmPassword =
+          value.length < 6 ? "minimum 6 characaters required" : "";
+        break;
       default:
         break;
     }
 
-    this.setState({ formErrors, [name]: value })
-  }
+    this.setState({ formErrors, [name]: value });
+  };
 
   render() {
     const { formErrors } = this.state;
@@ -254,4 +253,4 @@ class Signup extends Component {
   }
 }
 
-export default withRouter(Signup)
+export default withRouter(Signup);
