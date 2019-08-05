@@ -209,7 +209,7 @@ export default class SingleTerm extends Component {
           <div className="single-container sm-col-10">
             <div className="content sm-col-12">
               <p className="text-muted">
-                Added by:
+                Added by:&nbsp;
                 <b>
                   {this.state.historyData === null
                     ? term.user_name

@@ -19,16 +19,13 @@ export default class UserTerms extends Component {
   }
 
   async componentDidMount() {
-    const userId = ls.get("currentUserId");
-    const results = await fetcher.fetchUserSavedTerms(userId);
+    const results = await fetcher.fetchTermsByUser(ls.get("currentUserId"));
     this.setState({
       results: results
     });
   }
 
   HandleDelete = e => {
-    console.log("running");
-    const userId = ls.get("currentUserId");
     const termId = e.target.closest("span").getAttribute("data-id");
 
     return this.deleteUserTerm(termId);
@@ -67,7 +64,7 @@ export default class UserTerms extends Component {
           <div className="sm-col-12 single-result" key={index}>
             <Link
               className="single-result-link"
-              to={`/term/${result.termSlug}`}
+              to={`/term/${result.term_slug}`}
             >
               {result.term}
             </Link>
@@ -110,6 +107,7 @@ export default class UserTerms extends Component {
 
   render() {
     const currentUser = ls.get("currentUser");
+    console.log(ls.get('currentUserId'))
     return (
       <Fragment>
         <div className="results-wrapper sm-col-10">

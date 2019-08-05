@@ -50,7 +50,7 @@ async fetchUserSavedTerms(userId) {
 }
 
 async fetchTermsByUser(userId) {
-  const url = `${this.url}/getuserterms?user=${userId}`;
+  const url = `${this.url}/getuserterms?id=${userId}`;
   var response = await fetch(url);
   response = await response.json();
   return response;

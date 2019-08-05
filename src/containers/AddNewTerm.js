@@ -78,11 +78,13 @@ class AddNewTerm extends Component {
               response.topic_slug,
               response.term_slug,
               response.term
-            ]
+            ],
+            generateError: false
           });
         } else {
           this.setState({
-            generateError: true
+            generateError: true,
+            generatedLink: null
           });
         }
       });

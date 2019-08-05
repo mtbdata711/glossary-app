@@ -70,7 +70,7 @@ export default class SavedTerms extends Component {
           <div className="sm-col-12 single-result" key={index}>
             <Link
               className="single-result-link"
-              to={`/term/${result.termSlug}`}
+              to={`/term/${result.term_slug}`}
             >
               {result.term}
             </Link>
